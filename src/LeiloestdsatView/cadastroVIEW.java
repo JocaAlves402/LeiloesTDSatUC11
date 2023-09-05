@@ -1,9 +1,8 @@
-package LeiloesView;
+package LeiloestdsatView;
 
-import LeiloesDAO.ProdutosDAO;
-import LeiloesDAO.ProdutosDTO;
-import LeiloesDAO.conectaDAO;
 import javax.swing.JOptionPane;
+import leiloestdsatDao.ProdutosDAO;
+import leiloestdsatDao.ProdutosDTO;
 
 /**
  *
@@ -27,23 +26,25 @@ public class cadastroVIEW extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitulo = new javax.swing.JLabel();
-        lblSubTitulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblValor = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        txtValor = new javax.swing.JTextField();
+        cadastroNome = new javax.swing.JTextField();
+        cadastroValor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnCadastrar = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
+        lblCodigo = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblTitulo.setFont(new java.awt.Font("Lucida Fax", 0, 24)); // NOI18N
-        lblTitulo.setText("Sistema de Leilões");
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 24)); // NOI18N
+        jLabel1.setText("Sistema de Leilões");
 
-        lblSubTitulo.setText("Cadastre um novo produto");
+        jLabel3.setText("Cadastre um novo produto");
 
         lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNome.setText("Nome:");
@@ -51,9 +52,9 @@ public class cadastroVIEW extends javax.swing.JFrame {
         lblValor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblValor.setText("Valor:");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
+        cadastroNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
+                cadastroNomeActionPerformed(evt);
             }
         });
 
@@ -72,6 +73,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
             }
         });
 
+        lblCodigo.setText("Código:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +86,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                         .addComponent(btnCadastrar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(154, 154, 154)
-                        .addComponent(lblTitulo)))
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -92,38 +95,44 @@ public class cadastroVIEW extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(202, 202, 202)
-                            .addComponent(lblSubTitulo))
+                            .addComponent(jLabel3))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(72, 72, 72)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblNome)
-                                .addComponent(lblValor))
+                                .addComponent(lblValor)
+                                .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(31, 31, 31)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNome)
-                                .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(37, 37, 37)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cadastroNome)
+                                .addComponent(cadastroValor, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(lblTitulo)
+                .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSubTitulo)
-                .addGap(54, 54, 54)
+                .addComponent(jLabel3)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodigo)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cadastroNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValor)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cadastroValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnCadastrar)
                 .addGap(18, 18, 18)
@@ -136,31 +145,51 @@ public class cadastroVIEW extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+    private void cadastroNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroNomeActionPerformed
         
         
-    }//GEN-LAST:event_txtNomeActionPerformed
+    }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ProdutosDTO produtos = new ProdutosDTO();
-        ProdutosDAO produtosDao = new ProdutosDAO();
-            boolean status;
-            int resposta;
-         
-            produtos.setNome(txtNome.getText());
-            produtos.setValor(Double.valueOf(txtValor.getText()));
-            produtos.setNome("Vendido");
+        ProdutosDTO produto = new ProdutosDTO();
+    boolean status;
+    int resposta;
+        String id = txtCodigo.getText();
+        String nome = cadastroNome.getText();
+        String valor = cadastroValor.getText();
+        String statusProd = "A Venda";
+        produto.setId(id);
+        produto.setNome(nome);
+        produto.setValor(Double.parseDouble(valor));
+        produto.setStatusProd(statusProd);
             
-            status = produtosDao.conectar();
-            resposta = produtosDao.cadastrar(produtos);
-           
+        ProdutosDAO produtosDao = new ProdutosDAO();
+            status = produtosDao.connectDB();
+            if(status == false){
+                JOptionPane.showMessageDialog(null,"Erro de conexão");
+            }else{
+                resposta = produtosDao.cadastrar(produto);
+                if(resposta == 1){
+                    JOptionPane.showMessageDialog(null,"Dados incluidos com sucesso");
+                    //limpar os campos
+                    txtCodigo.setText("");
+                    cadastroNome.setText("");
+                    cadastroValor.setText("");
+    
+                    //posicionar o cursor para um próximo
+                    txtCodigo.requestFocus();
+                }else if (resposta ==1062){
+                    JOptionPane.showMessageDialog(null,"Matricula já foi cadastrada");   
+                }else{
+                    JOptionPane.showMessageDialog(null,"Erro ao tentar inserir dados");
+                }
                 produtosDao.desconectar();
-         
+            }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        listagemVIEW listagem = new listagemVIEW(); 
-        listagem.setVisible(true);
+    /*    listagemVIEW listagem = new listagemVIEW(); 
+        listagem.setVisible(true);*/
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**
@@ -201,13 +230,15 @@ public class cadastroVIEW extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnProdutos;
+    private javax.swing.JTextField cadastroNome;
+    private javax.swing.JTextField cadastroValor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblSubTitulo;
-    private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblValor;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtValor;
+    private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
 }

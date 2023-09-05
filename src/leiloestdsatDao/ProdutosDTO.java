@@ -1,21 +1,17 @@
-package LeiloesDAO;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+package leiloestdsatDao;
 
 /**
  *
- * @author Adm
+ * @author jocaa
  */
 public class ProdutosDTO {
-    private Integer id;
+  private String id;
     private String nome;
     private Double valor;
     private String statusProd;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -31,7 +27,7 @@ public class ProdutosDTO {
         return statusProd;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -45,6 +41,5 @@ public class ProdutosDTO {
 
     public void setStatusProd(String statusProd) {
         this.statusProd = statusProd;
-    }
-    
+    }  
 }

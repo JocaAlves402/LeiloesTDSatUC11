@@ -1,10 +1,9 @@
-package LeiloesView;
+package LeiloestdsatView;
 
 
-import LeiloesDAO.ProdutosDTO;
-import LeiloesDAO.ProdutosDAO;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import leiloestdsatDao.ProdutosDAO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

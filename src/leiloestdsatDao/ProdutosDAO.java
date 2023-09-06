@@ -6,6 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +18,7 @@ public class ProdutosDAO {
     Connection conn;
     PreparedStatement st;
     ResultSet rs;
-    
+    ArrayList<ProdutosDTO> lista = new ArrayList<>();
     /**
      * Conexão com o banco de dados MySQL
      */
@@ -46,12 +49,39 @@ public class ProdutosDAO {
             System.out.println("Erro ao conectar: " + ex.getMessage());
             return ex.getErrorCode();
         }
+        
     }
-public void desconectar(){
+    public void desconectar(){
         try {
             conn.close();
         } catch (SQLException ex) {
             //pode-se deixar vazio para evitar uma mensagem de erro desnecessária ao usuário
         }
     }
+
+    public ProdutosDTO listarProdutos(){
+        ProdutosDTO produto = new ProdutosDTO();
+        
+         
+            try{
+                st = conn.prepareStatement("SELECT * FROM produtos");
+
+                rs = st.executeQuery();
+                if(rs.next()){
+                    produto.setId(rs.getString("id"));
+                    produto.setNome(rs.getString("nome"));
+                    produto.setValor(rs.getDouble("valor"));
+                    produto.setStatusProd(rs.getString("status"));
+                    return produto;
+                }
+                else{
+                    return null;
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Algo deu errado "+ex.getMessage());
+                return null;
+            }
+            
+        }
+ 
 }

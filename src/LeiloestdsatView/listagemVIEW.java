@@ -1,14 +1,20 @@
 package LeiloestdsatView;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+ import javax.swing.table.TableRowSorter;
+import leiloestdsatDao.ListaProdutos;
 import leiloestdsatDao.ProdutosDAO;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import leiloestdsatDao.ProdutosDTO;
 
 /**
  *
@@ -21,7 +27,7 @@ public class listagemVIEW extends javax.swing.JFrame {
      */
     public listagemVIEW() {
         initComponents();
-        listarProdutos();
+        preencherTabela();
     }
 
     /**
@@ -34,7 +40,7 @@ public class listagemVIEW extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        listaProdutos = new javax.swing.JTable();
+        tblListaProdutos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -46,7 +52,7 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tblListaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -57,7 +63,7 @@ public class listagemVIEW extends javax.swing.JFrame {
                 "ID", "Nome", "Valor", "Status"
             }
         ));
-        jScrollPane1.setViewportView(listaProdutos);
+        jScrollPane1.setViewportView(tblListaProdutos);
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         jLabel1.setText("Lista de Produtos");
@@ -144,7 +150,7 @@ public class listagemVIEW extends javax.swing.JFrame {
         ProdutosDAO produtosdao = new ProdutosDAO();
         
         //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+       // listarProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
@@ -201,28 +207,34 @@ public class listagemVIEW extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable listaProdutos;
+    private javax.swing.JTable tblListaProdutos;
     // End of variables declaration//GEN-END:variables
 
-    private void listarProdutos(){
-        try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
-            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-            model.setNumRows(0);
-            
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
-                });
-            }
-        } catch (Exception e) {
-        }
     
+/**
+     * Este método atualiza a tabela de produtos ao iniciar o Softwere
+     */
+    public void preencherTabela(){
+                
+        Connection conn = null;
+        PreparedStatement st;
+        ResultSet rs = null;
+        DefaultTableModel modelo = (DefaultTableModel) tblListaProdutos.getModel();
+            modelo.setNumRows(0);
+        try{
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11", "root", "1505Jc109Sil");
+            st = conn.prepareStatement("SELECT * FROM produtos");
+           // st.setString(1, txtBuscar.getText());
+            rs = st.executeQuery();
+            while(rs.next()){
+                String id = String.valueOf(rs.getString("id"));
+                String[] linha = {id, rs.getString("nome"), rs.getString("valor"), rs.getString("status")};
+                modelo.addRow(linha);
+            }
+           tblListaProdutos.setModel(modelo);
+            conn.close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Algo deu errado aqui: "+e.getMessage());
+        }
     }
 }

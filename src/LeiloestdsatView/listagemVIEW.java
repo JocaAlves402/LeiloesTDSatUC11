@@ -240,40 +240,4 @@ public class listagemVIEW extends javax.swing.JFrame {
         }
     }
  
-    /**
-     * Este método altera o status de um produto cadastrado para vendido.
-     */
-    public void alterarStatus() throws SQLException {
-        ProdutosDTO produto = new ProdutosDTO();
-        ProdutosDAO dao = new ProdutosDAO();
-        boolean status;
-        int resposta;
-    
-        String id = id_produto_venda.getText();
-        String statusProd = "Vendido";
-        produto.setId(id);
-        produto.setStatusProd(statusProd);
-  
-        status = dao.connectDB();
-                
-        if(status == false){
-            JOptionPane.showMessageDialog(null,"Erro de conexão");
-        }else{
-            resposta = dao.statusVendido(produto);
-            System.out.println(produto.getId());
-            if(resposta == 1){
-                JOptionPane.showMessageDialog(null,"Dados atualizados com sucesso");
-            
-                //limpar os campos
-                id_produto_venda.setText("");
-                //posicionar o cursor para um próximo
-                id_produto_venda.requestFocus();
-            }else if (resposta ==1062){
-                JOptionPane.showMessageDialog(null,"Matricula já foi cadastrada");   
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao tentar alterar dados");
-            
-            }
-        }
-    }
 }

@@ -153,11 +153,12 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        
+        listaVendasVIEW vendas = new listaVendasVIEW(); 
+        vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
@@ -257,16 +258,16 @@ public class listagemVIEW extends javax.swing.JFrame {
             resposta = dao.statusVendido(produto);
             System.out.println(produto.getId());
             if(resposta == 1){
-                JOptionPane.showMessageDialog(null,"Dados atualizados com sucesso");
+                JOptionPane.showMessageDialog(null,"Produto vendido com sucesso");
             
                 //limpar os campos
                 id_produto_venda.setText("");
                 //posicionar o cursor para um próximo
                 id_produto_venda.requestFocus();
             }else if (resposta ==1062){
-                JOptionPane.showMessageDialog(null,"Matricula já foi cadastrada");   
+                JOptionPane.showMessageDialog(null,"Produto não cadastrado");   
             }else{
-                JOptionPane.showMessageDialog(null,"Erro ao tentar alterar dados");
+                JOptionPane.showMessageDialog(null,"Erro ao tentar efetuar a venda");
             
             }
         }

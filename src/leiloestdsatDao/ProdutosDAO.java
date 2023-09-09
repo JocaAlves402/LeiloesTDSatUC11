@@ -84,7 +84,7 @@ public class ProdutosDAO {
             conn.close();
         }
     }
-/*
+
     public int statusVendido(ProdutosDTO produto) throws SQLException {
         int status;
         try {
@@ -122,7 +122,7 @@ public class ProdutosDAO {
             return null;
         }
 
-    } */
+    } 
     public List<ProdutosDTO> ListaProdutosVendidos(String statusProd) {
       try {
             st = conn.prepareStatement("SELECT * FROM produtos WHERE status = ?");

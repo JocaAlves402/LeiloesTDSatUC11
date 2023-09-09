@@ -6,13 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
- import javax.swing.table.TableRowSorter;
-import leiloestdsatDao.ListaProdutos;
 import leiloestdsatDao.ProdutosDAO;
 import leiloestdsatDao.ProdutosDTO;
 
@@ -145,17 +142,19 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
-        
-        ProdutosDAO produtosdao = new ProdutosDAO();
-        
-        //produtosdao.venderProduto(Integer.parseInt(id));
-       // listarProdutos();
+    
+        try {
+            venderProdutos();
+        } catch (SQLException ex) {
+            Logger.getLogger(listagemVIEW.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       preencherTabela(); 
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        listaVendasVIEW vendas = new listaVendasVIEW(); 
+        vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -235,6 +234,42 @@ public class listagemVIEW extends javax.swing.JFrame {
             conn.close();
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Algo deu errado aqui: "+e.getMessage());
+        }
+    }
+    /**
+     * Este método altera o status de um produto cadastrado para vendido.
+     */
+    public void venderProdutos() throws SQLException {
+        ProdutosDTO produto = new ProdutosDTO();
+        ProdutosDAO dao = new ProdutosDAO();
+        boolean status;
+        int resposta;
+    
+        String id = id_produto_venda.getText();
+        String statusProd = "Vendido";
+        produto.setId(id);
+        produto.setStatusProd(statusProd);
+  
+        status = dao.connectDB();
+                
+        if(status == false){
+            JOptionPane.showMessageDialog(null,"Erro de conexão");
+        }else{
+            resposta = dao.statusVendido(produto);
+            System.out.println(produto.getId());
+            if(resposta == 1){
+                JOptionPane.showMessageDialog(null,"Produto vendido com sucesso");
+            
+                //limpar os campos
+                id_produto_venda.setText("");
+                //posicionar o cursor para um próximo
+                id_produto_venda.requestFocus();
+            }else if (resposta ==1062){
+                JOptionPane.showMessageDialog(null,"Produto não cadastrado");   
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao tentar efetuar a venda");
+            
+            }
         }
     }
 }
